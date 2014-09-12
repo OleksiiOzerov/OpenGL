@@ -3,7 +3,7 @@ package com.samsung.openglproject;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
-//import java.util.Random;
+import java.util.Random;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -11,6 +11,7 @@ import javax.microedition.khronos.opengles.GL10;
 import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView.Renderer;
+//import java.util.Random;
 
 public class GLRenderer implements Renderer {
 
@@ -38,27 +39,36 @@ public class GLRenderer implements Renderer {
     private final float period = 1000/FPS;
     private final Random randomColor = new Random();*/
 
+    float rectVertices[] = {
+            //Triangle 1
+            0.0f,   1.0f,     0.0f,    1.0f,   0.0f,
+           -1.0f,  -1.0f,     1.0f,    1.0f,   1.0f,
+            1.0f,  -1.0f,     1.0f,    1.0f,   1.0f,
+
+/*            //Triangle 2
+            0.5f,    0.5f,   1.0f,   0.0f,   0.0f,
+            0.5f,   -0.5f,   0.0f,   1.0f,   0.0f,
+           -0.5f,   -0.5f,   0.0f,   0.0f,   1.0f,*/
+    };
+
+    float rectRandomVertices[] = new float[10];
 
     public GLRenderer(Context context) {
         this.context = context;
 
-        float rectVerticies[] = {
-                //Triangle 1
-               -0.5f,   0.5f,     1.0f,    0.0f,   0.0f,
-                0.5f,   0.5f,     0.0f,    1.0f,   0.0f,
-               -0.5f,  -0.5f,     0.0f,    0.0f,   1.0f,
+        for (int i = 0; i < rectRandomVertices.length; ++i)
+        {
+            Random r = new Random();
+            r.setSeed((long)r.nextFloat());
 
-                //Triangle 2
-                0.5f,    0.5f,   1.0f,   0.0f,   0.0f,
-                0.5f,   -0.5f,   0.0f,   1.0f,   0.0f,
-               -0.5f,   -0.5f,  0.0f,   0.0f,   1.0f,
-        };
+            rectRandomVertices[i] = r.nextFloat();
+        }
 
         vertexData = ByteBuffer
-                .allocateDirect(rectVerticies.length * BYTES_PER_FLOAT)
+                .allocateDirect(rectVertices.length * BYTES_PER_FLOAT)
                 .order(ByteOrder.nativeOrder())
                 .asFloatBuffer();
-        vertexData.put(rectVerticies);
+        vertexData.put(rectVertices);
     }
 
     @Override
@@ -104,7 +114,7 @@ public class GLRenderer implements Renderer {
 
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
         //GLES20.glUniform4f(uColorLocation, 1.0f, 0.0f, 0.0f, 1.0f);
-        GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, 6);
+        GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, 3);
     }
 
 }

@@ -8,8 +8,8 @@ import android.content.Context;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
-import android.widget.TextView;
+//import android.util.Log;
+//import android.widget.TextView;
 
 public class Main extends ActionBarActivity {
 
@@ -54,11 +54,11 @@ public class Main extends ActionBarActivity {
                 textView.setText(String.valueOf(number));
             }
 
-        });*/
+        });
 
 
         Log.i("Vilix", readTextFile(this, R.raw.simple_vertex_shader));
-        Log.i("Vilix", readTextFile(this, R.raw.simple_fragment_shader));
+        Log.i("Vilix", readTextFile(this, R.raw.simple_fragment_shader));*/
 
     }
 
